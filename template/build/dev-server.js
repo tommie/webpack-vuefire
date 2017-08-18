@@ -8,6 +8,7 @@ if (!process.env.NODE_ENV) {
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
+var FireBaseServer = require('firebase-server')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
@@ -84,9 +85,15 @@ devMiddleware.waitUntilValid(() => {
 
 var server = app.listen(port)
 
+var fbServer = new FireBaseServer({server: server}, '', {
+  // Insert bootstrap data for the realtime database.
+  greetings: [{lang: 'en', text: 'Welcome to Your Vue.js App'}]
+})
+
 module.exports = {
   ready: readyPromise,
   close: () => {
+    fbServer.close()
     server.close()
   }
 }

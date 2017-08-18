@@ -13,7 +13,14 @@ var env = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : {{/if_or}}config.build.env
 
-var webpackConfig = merge(baseWebpackConfig, {
+{{#if_or unit e2e}}if (process.env.NODE_ENV === 'testing') {
+  // add local firebase server patches to all endpoints.
+  Object.keys(baseWebpackConfig.entry).forEach(function (name) {
+    baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
+  })
+}
+
+{{/if_or}}var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,

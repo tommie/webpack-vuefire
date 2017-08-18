@@ -1,13 +1,17 @@
-# vue-webpack-boilerplate
+# vuefire-webpack
 
-> A full-featured Webpack setup with hot-reload, lint-on-save, unit testing & css extraction.
+> A full-featured VueFire Webpack setup with hot-reload, lint-on-save, unit testing & css extraction.
 
-> This template is Vue 2.0 compatible. For Vue 1.x use this command: `vue init webpack#1.0 my-project`
+> This template is Vue 2.0 compatible.
 
 ## Documentation
 
-- [For this template](http://vuejs-templates.github.io/webpack): common questions specific to this template are answered and each part is described in greater detail
+- [For VueFire](https://github.com/vuejs/vuefire): information about the VueFire plugin
 - [For Vue 2.0](http://vuejs.org/guide/): general information about how to work with Vue, not specific to this template
+
+On top of VueFire, this adds a `$fbdb` getter to each v-node that returns the `fbdb` options object from the closest ancestor. This should be used to get references for bindings in VueFire's `firebase` object as well as making updates to data.
+
+This also ties in [firebase-server](https://github.com/urish/firebase-server) to run a fully local development environment.
 
 ## Usage
 
@@ -15,13 +19,15 @@ This is a project template for [vue-cli](https://github.com/vuejs/vue-cli). **It
 
 ``` bash
 $ npm install -g vue-cli
-$ vue init webpack my-project
+$ vue init tommie/webpack-vuefire my-project
 $ cd my-project
 $ npm install
 $ npm run dev
 ```
 
 If port 8080 is already in use on your machine you must change the port number in `/config/index.js`. Otherwise `npm run dev` will fail.
+
+Configure initial mock data in the realtime database in `build/dev-server.js`.
 
 ## What's Included
 
@@ -31,6 +37,7 @@ If port 8080 is already in use on your machine you must change the port number i
   - State preserving compilation error overlay
   - Lint-on-save with ESLint
   - Source maps
+  - Starts a local Firebase realtime database server for testing.
 
 - `npm run build`: Production ready build.
   - JavaScript minified with [UglifyJS](https://github.com/mishoo/UglifyJS2).

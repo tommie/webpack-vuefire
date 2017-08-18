@@ -14,7 +14,9 @@
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
   },
   "dependencies": {
-    "vue": "^2.3.3"{{#router}},
+    "firebase": "^4.2.0",
+    "vue": "^2.3.3",
+    "vuefire": "^1.4.3"{{#router}},
     "vue-router": "^2.6.0"{{/router}}
   },
   "devDependencies": {
@@ -53,6 +55,7 @@
     "express": "^4.14.1",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.11.1",
+    "firebase-server": "^0.11.0",
     "friendly-errors-webpack-plugin": "^1.1.3",
     "html-webpack-plugin": "^2.28.0",
     "http-proxy-middleware": "^0.17.3",
@@ -60,6 +63,7 @@
     {{#unit}}
     "cross-env": "^5.0.1",
     "karma": "^1.4.1",
+    "firebase-mock": "^1.1.5",
     "karma-coverage": "^1.1.1",
     "karma-mocha": "^1.3.0",
     "karma-phantomjs-launcher": "^1.0.2",

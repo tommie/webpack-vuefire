@@ -10,4 +10,5 @@
 - [API Proxying During Development](proxy.md)
 - [Unit Testing](unit.md)
 - [End-to-end Testing](e2e.md)
+- [VueFire Extras](vuefire.md)
 - [Prerendering for SEO](prerender.md)
