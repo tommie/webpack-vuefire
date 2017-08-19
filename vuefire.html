@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Pre-Processors · GitBook</title>
+        <title>VueFire Extras · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="static.html" />
+    <link rel="next" href="prerender.html" />
     
     
-    <link rel="prev" href="linter.html" />
+    <link rel="prev" href="e2e.html" />
     
 
     </head>
@@ -141,7 +141,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="pre-processors.html">
+        <li class="chapter " data-level="1.5" data-path="pre-processors.html">
             
                 <a href="pre-processors.html">
             
@@ -232,7 +232,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="vuefire.html">
+        <li class="chapter active" data-level="1.12" data-path="vuefire.html">
             
                 <a href="vuefire.html">
             
@@ -288,7 +288,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Pre-Processors</a>
+        <a href="." >VueFire Extras</a>
     </h1>
 </div>
 
@@ -303,39 +303,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pre-processors">Pre-Processors</h1>
-<p>This boilerplate has pre-configured CSS extraction for most popular CSS pre-processors including LESS, SASS, Stylus, and PostCSS. To use a pre-processor, all you need to do is installing the appropriate webpack loader for it. For example, to use SASS:</p>
-<pre><code class="lang-bash">npm install sass-loader node-sass --save-dev
-</code></pre>
-<p>Note you also need to install <code>node-sass</code> because <code>sass-loader</code> depends on it as a peer dependency.</p>
-<h3 id="using-pre-processors-inside-components">Using Pre-Processors inside Components</h3>
-<p>Once installed, you can use the pre-processors inside your <code>*.vue</code> components using the <code>lang</code> attribute on <code>&lt;style&gt;</code> tags:</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;scss&quot;</span>&gt;</span><span class="css">
-<span class="hljs-comment">/* write SASS! */</span>
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
-</code></pre>
-<h3 id="a-note-on-sass-syntax">A note on SASS syntax</h3>
-<ul>
-<li><code>lang=&quot;scss&quot;</code> corresponds to the CSS-superset syntax (with curly braces and semicolons).</li>
-<li><code>lang=&quot;sass&quot;</code> corresponds to the indentation-based syntax.</li>
-</ul>
-<h3 id="postcss">PostCSS</h3>
-<p>Styles in <code>*.vue</code> files are piped through PostCSS by default, so you don&apos;t need to use a specific loader for it. You can simply add PostCSS plugins you want to use in <code>build/webpack.base.conf.js</code> under the <code>vue</code> block:</p>
-<pre><code class="lang-js"><span class="hljs-comment">// build/webpack.base.conf.js</span>
-<span class="hljs-built_in">module</span>.exports = {
-  <span class="hljs-comment">// ...</span>
-  vue: {
-    postcss: [<span class="hljs-comment">/* your plugins */</span>]
-  }
-}
-</code></pre>
-<p>See <a href="http://vuejs.github.io/vue-loader/en/features/postcss.html" target="_blank">vue-loader&apos;s related documentation</a> for more details.</p>
-<h3 id="standalone-css-files">Standalone CSS Files</h3>
-<p>To ensure consistent extraction and processing, it is recommended to import global, standalone style files from your root <code>App.vue</code> component, for example:</p>
-<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- App.vue --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./styles/global.less&quot;</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;less&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
-</code></pre>
-<p>Note you should probably only do this for the styles written by yourself for your application. For existing libraries e.g. Bootstrap or Semantic UI, you can place them inside <code>/static</code> and reference them directly in <code>index.html</code>. This avoids extra build time and also is better for browser caching. (See <a href="static.html">Static Asset Handling</a>)</p>
+                                <h1 id="vuefire-extras">VueFire Extras</h1>
+<p>To simplify working with <a href="https://firebase.google.com/" target="_blank">Firebase</a>,
+this template includes <a href="https://github.com/vuejs/vuefire" target="_blank">VueFire</a> as
+well as some helpers for development.</p>
+<p>The <code>src/fbdb.js</code> file contains a small addition to VueFire that
+allows easily creating hierarchies of Firebase references. In the
+template, the app component sets its <code>fbref</code> to the root of the
+Firebase realtime database and makes <code>$fbref</code> available on a Vue
+instance, e.g. in VueFire&apos;s <code>firebase</code> function. Any instance that
+sets <code>fbref</code> will make its children be rooted at that reference
+instead. This simplifies binding to a user-dependent part of the
+database.</p>
+<h2 id="mocks-and-local-databases">Mocks and local databases</h2>
+<p>The unit test in <code>test/unit/specs/Hello.spec.js</code> uses
+<a href="https://github.com/soumak77/firebase-mock" target="_blank"><code>firebase-mock</code></a> to make
+self-contained unit tests.</p>
+<p>The development server and the end-to-end tests use
+<a href="https://github.com/urish/firebase-server" target="_blank"><code>firebase-server</code></a> to
+provide a local realtime database, letting you play around without a
+Firebase account initially. The data in the server is reset every time
+the server restarts. Initial data is populated in
+<code>build/dev-server.js</code>.</p>
+<p><strong>NOTE</strong> When running under the development server, <strong>all</strong> Firebase
+WebSocket connections are routed to the development server. If your
+application uses more than one database, this may not be what you
+want, and you will need to make exceptions in <code>build/dev-client.js</code>.</p>
 
                                 
                                 </section>
@@ -363,12 +356,12 @@
 
             
                 
-                <a href="linter.html" class="navigation navigation-prev " aria-label="Previous page: Linter Configuration">
+                <a href="e2e.html" class="navigation navigation-prev " aria-label="Previous page: End-to-end Testing">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="static.html" class="navigation navigation-next " aria-label="Next page: Handling Static Assets">
+                <a href="prerender.html" class="navigation navigation-next " aria-label="Next page: Prerendering for SEO">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -379,7 +372,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Pre-Processors","level":"1.5","depth":1,"next":{"title":"Handling Static Assets","level":"1.6","depth":1,"path":"static.md","ref":"static.md","articles":[]},"previous":{"title":"Linter Configuration","level":"1.4","depth":1,"path":"linter.md","ref":"linter.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"pre-processors.md","mtime":"2017-08-19T10:28:28.984Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-08-19T11:05:08.047Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"VueFire Extras","level":"1.12","depth":1,"next":{"title":"Prerendering for SEO","level":"1.13","depth":1,"path":"prerender.md","ref":"prerender.md","articles":[]},"previous":{"title":"End-to-end Testing","level":"1.11","depth":1,"path":"e2e.md","ref":"e2e.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"vuefire.md","mtime":"2017-08-19T11:02:52.411Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-08-19T11:05:08.047Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
